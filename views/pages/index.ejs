@@ -1,0 +1,262 @@
+<%- include ("../partials/header.ejs") %>
+    <main>
+        <section class="banner">
+            <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper bannerSwiper">
+                <div class="parallax-bg" style="background-color: transparent;" data-swiper-parallax="-23%"></div>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="title text-success text-center" data-swiper-parallax="-300">Bağışlarınız İle Destek
+                            Olun</div>
+                        <div class="subtitle text-center text-info mb-3" data-swiper-parallax="-200">Yapacağınız her
+                            bağış ile</div>
+                        <div class="text dark-editör-area" data-swiper-parallax="-100">
+                            <%- homeData.bannertext %>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="title text-success text-center" data-swiper-parallax="-300">Bağışlarınız İle Destek
+                            Olun</div>
+                        <div class="subtitle text-center text-info mb-3" data-swiper-parallax="-200">Yapacağınız her
+                            bağış ile</div>
+                        <div class="text" data-swiper-parallax="-100">
+                            <p class="text-secondary  text-center">
+                                Yapacağınız her bağış ile öğrencilerimizin derste ihtiyac duyduğu ve elamadığı
+                                bilgisayarlar kavuşmalarını sağlayın
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+            <div class="mouse"> <span></span> </div>
+        </section>
+
+        <section class="px-4 py-5 my-5 text-center">
+            <img class="d-block mx-auto mb-4" src="images/1.png" alt="" width="" height="172">
+            <p class="display-6 fw-light text-dark">Gönüllü Bağışlar</p>
+            <div class="col-lg-6 mx-auto">
+                <div class="lead mb-4 fs-6"><%- homeData.herotext %> </p>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-4">
+                    <a href="#scroll" type="button" class="btn btn-outline-secondary px-4 btn-small">Bağışta Bulun</a>
+                </div>
+            </div>
+        </section>
+        <section class="product-cards pt-4" id="scroll">
+            <div class="container">
+                <div class="row">
+                    <% found.forEach((call,i)=>{ %>
+                        <% let total=call.totalAmount; let process=100-((100*call.remainingAmount)/total); let
+                            conclusion=Math.ceil(process); let remainder=(100 - conclusion)/10; %>
+                            <div class="col-lg-3 mb-4">
+                                <div class="product-card card border-0 mb-4 h-100">
+                                    <div class="card-header border-0 bg-transparent">
+                                        <figure class="bar-image" data-r="<%=remainder%>">
+                                            <img class="img-240" src="data:image/png;base64, <%= call.image %>" alt=""/>
+                                        </figure>
+                                    </div>
+                                    <div class="card-body">
+                                        <h6 class="mb-4">
+                                            <%= call.title %>
+                                        </h6>
+
+                                        <div class="progress">
+                                            <% if(conclusion>=100){ %>
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                                role="progressbar" data-w="100" aria-valuenow="0"
+                                                aria-valuemin="0" aria-valuemax="100">
+                                                100%
+                                                </div>
+                                            <%}else{%> 
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                                role="progressbar" data-w="<%=conclusion%>" aria-valuenow="0"
+                                                aria-valuemin="0" aria-valuemax="100">
+                                                <%=conclusion%>%
+                                            </div>
+                                            <% } %> 
+                                        </div>
+                                    </div>
+                                    <% if (conclusion>=100) { %>
+                                        <div class="card-footer bg-success">
+                                            <p class="text-success fs-8 text-center text-white p-1"> Bağış Tamamlandı
+                                            </p>
+                                        </div>
+                                        <%} else { %>
+                                            <div class="card-footer bg-transparent">
+                                                <div class="btn-group btn-group-sm">
+                                                    <button class="btn btn-success" type="button" data-bs-toggle="modal"
+                                                        data-bs-target="#exampleModal<%= call._id %>">Bağış Yap</button>
+                                                    <a href="/detay" class="btn btn-outline-secondary">İncle</a>
+                                                </div>
+                                            </div>
+                                        <% } %>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="exampleModal<%= call._id %>" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header border-0">
+                                            <h5 class="modal-title" id="exampleModalLabel">
+                                                <%= call.title %>
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container">
+                                                <p class="text-secondary">
+                                                    Bu bilgisayar için bağışta bulunun.
+                                                </p>
+                                                <div class="p-2 border my-1 border-success rounded w-fit"><span class="fw-bold fs-8">Kalan Bağış Miktarı: 
+                                                    <span class="text-warning"><%= call.remainingAmount %> TL</span></span></div>
+                                                <div class="payment-area">
+                                                    <form action="/makepayment" method="POST" class="price-form">
+                                                        <div class="card bg-light bg-gradient mt-4">
+                                                            <div class="card-body">
+                                                                <small
+                                                                    class="text-primary mb-3 pb-3 border-bottom d-block">Bağışçı
+                                                                    Bilgileri</small>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="name"
+                                                                                class="form-label"><small>İsim</small></label>
+                                                                            <input type="text" class="form-control"
+                                                                                id="name" required name="name">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="surname"
+                                                                                class="form-label"><small>Soyisim</small></label>
+                                                                            <input type="text" class="form-control"
+                                                                                id="surname" required name="surname">
+                                                                            <!-- <div class="invalid-feedback">Bu alan boş
+                                                                                brakılamaz.</div> -->
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="email"
+                                                                                class="form-label"><small>E-Posta</small></label>
+                                                                            <input type="email" class="form-control"
+                                                                                id="email" required name="email">
+                                                                            <!-- <div class="invalid-feedback">Bu alan boş
+                                                                                brakılamaz.</div> -->
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="phone"
+                                                                                class="form-label"><small>Telefon</small></label>
+                                                                            <input type="phone" class="form-control"
+                                                                                id="phone" required name="phone">
+                                                                            <!-- <div class="invalid-feedback">Bu alan boş
+                                                                                brakılamaz.</div> -->
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card bg-light bg-gradient mt-4">
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-8">
+                                                                        <small
+                                                                            class="text-primary mb-3 pb-3 border-bottom d-block">Ödeme
+                                                                            Bilgileri</small>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <img src="images/card.png" alt=""
+                                                                            class="img-fluid">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <input type="text" hidden value="<%= call._id %>"
+                                                                        name="productId">
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <small class="d-block text-dark mb-2">Bağış Tutarı</small>
+                                                                            <div class="row">
+                                                                                <div class="col-md-6">
+                                                                                    <input type="radio" class="btn-check price-check" name="test" id="option1<%= i %>" autocomplete="off" value="10">
+                                                                                    <label class="btn btn-outline-primary" for="option1<%= i %>">10 TL</label>
+                                                                                    
+                                                                                    <input type="radio" class="btn-check price-check" name="test" id="option2<%= i %>" autocomplete="off" value="50">
+                                                                                    <label class="btn btn-outline-primary" for="option2<%= i %>">50 TL</label>
+
+                                                                                    <input type="radio" class="btn-check price-check" name="test" id="option3<%= i %>" autocomplete="off" value="100">
+                                                                                    <label class="btn btn-outline-primary" for="option3<%= i %>">100 TL</label>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <div class="input-group mb-3">
+                                                                                        <input type="text" class="form-control price-input border-primary" name="paidPrice" id="option4<%= i %>" aria-describedby="option4<%= i %>">
+                                                                                        <span class="input-group-text bg-primary border-primary text-white" id="option4<%= i %>">TL</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="cardHolderName"
+                                                                                class="form-label"><small>Kart
+                                                                                    Üzerindeki
+                                                                                    İsim Soyisim</small></label>
+                                                                            <input type="text" class="form-control"
+                                                                                id="cardHolderName" required
+                                                                                name="cardHolderName">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="cardNumber"
+                                                                                class="form-label"><small>Kart
+                                                                                    Numarası</small></label>
+                                                                            <input type="number" class="form-control"
+                                                                                id="cardNumber" required
+                                                                                name="cardNumber">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <div class="mb-3">
+                                                                            <label for="date"
+                                                                                class="form-label price-card-date"><small>Bitiş
+                                                                                    Tarihi</small></label>
+                                                                            <input type="text" class="form-control"
+                                                                                id="date" required name="date"
+                                                                                minlength="5" maxlength="5" placeholder="MM/YY">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <div class="mb-3">
+                                                                            <label for="cvc"
+                                                                                class="form-label"><small>CVC</small></label>
+                                                                            <input type="text" class="form-control"
+                                                                                id="cvc" maxlength="3" required
+                                                                                name="cvc" placeholder="***">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-12 text-center">
+                                                                        <button type="submit"
+                                                                            class="btn btn-success mt-4 price-button">Bağış
+                                                                            Yap</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }); %>
+                </div>
+            </div>
+        </section>
+    </main>
+    <%- include ("../partials/footer.ejs") %>

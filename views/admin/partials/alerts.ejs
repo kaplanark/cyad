@@ -1,0 +1,47 @@
+<div class="toast-container">
+    <% if (message && message.length > 0) { %>
+    <div class="toast fade show shadow-sm" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <strong class="me-auto"><i class="text-primary bi-chat-fill"></i> Mesaj</strong>
+          <small>1 second ago</small>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            <%= message %>
+        </div>
+    </div>
+    <% } if (success && success.length > 0) { %>
+    <div class="toast fade show shadow-sm" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto"><i class="text-success bi-check-circle-fill"></i> Başarılı</strong>
+            <small>1 second ago</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            <%= success %>
+        </div>
+    </div>
+    <% } if (errors && errors.length > 0) { %>
+    <div class="toast fade show shadow-sm" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto"><i class="text-danger bi-exclamation-triangle-fill"></i> Hata!</strong>
+            <small>1 second ago</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
+              <%= errors %>
+        </div>
+    </div>
+    <% } if (info && info.length > 0) { %>
+        <div class="toast fade show shadow-sm" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+              <strong class="me-auto"><i class="text-info bi-info-circle-fill"></i> Bilgi</strong>
+              <small>1 second ago</small>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                <%= info %>
+            </div>
+        </div>
+    <% } %>  
+</div>

@@ -1,0 +1,31 @@
+<%- include ("../../admin/partials/header.ejs") %>
+    <div class="container">
+        <div class="row">
+            <% found.forEach((call)=>{ %>
+                <div class="col-md-12">
+                    <div class="card mb-3">
+                        <div class="card-header bg-white border-0">
+                            <span class="text-warning"><i class="bi bi-envelope"></i></span>
+                            <%= call.name %>
+                        </div>
+                        <div class="card-body">
+                          <blockquote class="blockquote mb-0">
+                            <p class="fs-6 text-dark"><span>Konu: </span><%= call.subject %></p>
+                            <p class="fs-6 text-secondary"><span>Mesaj: </span><%= call.message %></p>
+                            <footer class="mt-2 fs-6">
+                                <span>Kimden: <cite title="Source Title"><%= call.email %></cite></span>
+                            </footer>
+                          </blockquote>
+                        </div>
+                        <div class="card-footer bg-white">
+                            <div class="btn-group">
+                                <a href="/deletemail/<%= call._id %>" class="btn btn-danger btn-small"><i class="bi bi-trash"></i><span>Sil</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+<%- include ("../../admin/partials/alerts.ejs") %>
+<%- include ("../../admin/partials/footer.ejs") %>

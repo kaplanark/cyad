@@ -1,0 +1,99 @@
+<footer class="pt-3 mt-4">
+  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Anasayfa</a></li>
+    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Hakkında</a></li>
+    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Yasal Hükümler</a></li>
+    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Yardım</a></li>
+    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">İletişim</a></li>
+  </ul>
+  <p class="text-center text-muted">© 2021 Company, Inc</p>
+  <div class="bg-dark py-4 mt-4" style="border-top: 4px solid #d1d3f8;">
+    <div class="row">
+      <div class="col-md-4">
+
+      </div>
+      <div class="col-md-4 d-flex flex-column align-items-center">
+        <img src="images/footer-logo.png" alt="" height="128">
+        <small class="text-secondary mt-2">Kütahya Dumlupınar Üniversitesi</small>
+      </div>
+      <div class="col-md-4">
+
+      </div>
+    </div>
+  </div>
+</footer>
+<div class="toast-container">
+  <% if (message && message.length> 0) { %>
+    <div class="toast fade show shadow-sm" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto"><i class="text-primary bi-chat-fill"></i> Mesaj</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        <%= message %>
+      </div>
+    </div>
+    <% } if (success && success.length> 0) { %>
+      <div class="toast fade show shadow-sm" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <strong class="me-auto"><i class="text-success bi-check-circle-fill"></i> Başarılı</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+          <%= success %>
+        </div>
+      </div>
+      <% } if (errors && errors.length> 0) { %>
+        <div class="toast fade show shadow-sm" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <strong class="me-auto"><i class="text-danger bi-exclamation-triangle-fill"></i> Hata
+              !</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
+            <%= errors %>
+          </div>
+        </div>
+        <% } if (info && info.length> 0) { %>
+          <div class="toast fade show shadow-sm" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+              <strong class="me-auto"><i class="text-info bi-info-circle-fill"></i> Bilgi</strong>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+              <%= info %>
+            </div>
+          </div>
+          <% } %>
+</div>
+<script src="/assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/assets/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="/assets/js/swiper-bundle.min.js"></script>
+<script src="/assets/js/main.js"></script>
+<script type="text/javascript">
+  document.getElementById('date').onkeyup = function (e) {
+    if (this.value == this.lastValue) return;
+    var caretPosition = this.selectionStart;
+    var sanitizedValue = this.value.replace(/[^0-9]/gi, '');
+    var parts = [];
+
+    for (var i = 0, len = sanitizedValue.length; i < len; i += 2) {
+      parts.push(sanitizedValue.substring(i, i + 2));
+    }
+
+    for (var i = caretPosition - 1; i >= 0; i--) {
+      var c = this.value[i];
+      if (c < '0' || c > '9') {
+        caretPosition--;
+      }
+    }
+    caretPosition += Math.floor(caretPosition / 2);
+
+    this.value = this.lastValue = parts.join('/');
+    this.selectionStart = this.selectionEnd = caretPosition;
+  }
+</script>
+</body>
+
+</html>

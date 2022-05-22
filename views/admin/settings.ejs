@@ -1,0 +1,103 @@
+<%- include ("../admin/partials/header.ejs") %>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-12 mb-4">
+            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#userModal">Yeni Kullanıcı <i class="bi bi-plus-lg"></i></button>
+        </div>
+        <div class="col-lg-12">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Kullanıcı Id</th>
+                    <th scope="col">Kullanıcı Adı</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Parola</th>
+                    <th scope="col">İşlem</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <% userdata.forEach((call,i)=>{ %>
+                  <tr>
+                    <th scope="row"><%= i %> </th> 
+                    <td><%= call._id%> </td>
+                    <td><%= call.username %> </td>
+                    <td><%= call.email %> </td>
+                    <td>******** </td>
+                    <td>
+                        <% if(i==0){%>
+                            <button type="button" class="btn btn-outline-secondary btn-sm" disabled>Güncelle</button>
+                        <% }else{ %>
+                            <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal<%= i %>">Güncelle</button>
+                        <% } %> 
+                    </td>
+                  </tr>
+                  <div class="modal fade" id="exampleModal<%= i %>" tabindex="-1" aria-labelledby="exampleModalLabel<%= i %>" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h6 class="modal-title" id="exampleModalLabel<%= i %>">
+                            Kullanıcı Güncelleme ( <span class="text-info fs-8"><%= call.username %></span> )
+                          </h6>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/updateuser" method="POST">
+                                <input type="text" name="id" hidden value="<%= call._id %>">
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label fs-8">Kullanıcı Adı</label>
+                                    <input type="text" name="username" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp" value="<%= call.username %>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label fs-8">E-Mail</label>
+                                    <input type="email" name="email" class="form-control" id="exampleInputPassword1" value="<%= call.email %>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label fs-8">Parola</label>
+                                    <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-sm">Güncelle</button>
+                                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">İptal</button>
+                            </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <% }) %> 
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title" id="userModalLabel">Kullanıcı Ekle</h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="/newuser" method="POST">
+                <div class="mb-3">
+                    <label for="exampleInputEmail2" class="form-label fs-8">Kullanıcı Adı</label>
+                    <input type="text" name="username" class="form-control" id="exampleInputEmail2"
+                        aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword2" class="form-label fs-8">E-Mail</label>
+                    <input type="email" name="email" class="form-control" id="exampleInputPassword2">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword3" class="form-label fs-8">Parola</label>
+                    <input type="password" name="password" class="form-control" id="exampleInputPassword3">
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm">Ekle</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">İptal</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<%- include ("../admin/partials/alerts.ejs") %>
+<%- include ("../admin/partials/footer.ejs") %>

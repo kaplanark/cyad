@@ -1,0 +1,32 @@
+<%- include ("../admin/partials/header.ejs") %>
+<div class="container my-4">
+    <form action="/hpsettings" method="post">
+        <input type="text" value="<%= found._id %>" name="id" hidden>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Site Başlığı</label>
+                    <input type="text" name="title" class="form-control" id="title" value="<%= found.title %>">
+                </div>
+                <div class="mb-3">
+                    <label for="bannertext" class="form-label">Banner Yazısı</label>
+                    <textarea name="bannertext" id="bannertext" class="form-control">
+                        <%= found.bannertext %>
+                    </textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="herotext" class="form-label">Hero Yazısı</label>
+                    <textarea name="herotext" id="herotext" class="form-control">
+                        <%= found.herotext %>
+                    </textarea>
+                </div>
+            </div>
+            <div class="col-lg-6">
+
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Güncelle</button>
+    </form>
+</div>
+<%- include ("../admin/partials/alerts.ejs") %>
+<%- include ("../admin/partials/footer.ejs") %>

@@ -1,0 +1,27 @@
+<%- include ("../partials/header.ejs") %>
+    <section class="my-4 py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3 mt-4 pt-4">
+                    <h3 class="mb-4">Bize Ulaşın</h3>
+                    <form action="/sendcontactform" method="POST">
+                        <div class="form-group mb-3">
+                            <input type="text" name="name" class="form-control" placeholder="İsim Soyisim">
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="email" name="email" class="form-control" placeholder="E-Mail">
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="text" name="subject" class="form-control" placeholder="Konu">
+                        </div>
+                        <div class="form-group mb-3">
+                            <textarea name="message" rows="2" class="form-control" placeholder="Mesaj"></textarea>
+                        </div>
+                        <!-- <input type="checkbox" name="permission"> -->
+                        <button type="submit" class="btn btn-primary">Gönder</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+<%- include ("../partials/footer.ejs") %>

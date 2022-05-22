@@ -1,0 +1,53 @@
+<%- include ("../partials/header.ejs") %>
+    <div class="container-fluid mt-3">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col fs-8">#</th>
+                    <th scope="col fs-8">Ad Soyad</th>
+                    <th scope="col fs-8">Ürün Id</th>
+                    <th scope="col fs-8">E-Posta</th>
+                    <th scope="col fs-8">Telefon</th>
+                    <th scope="col fs-8">İşlem Tarihi</th>
+                    <th scope="col fs-8">Bağış Tutarı</th>
+                    <th scope="col fs-8"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% found.forEach((call,i)=>{ %>
+                    <tr>
+                        <th scope="row"><%= i %></th>
+                        <td class="fs-8"><%= call.name %> <%= call.surname %></td>
+                        <td class="fs-8"><%= call.productId %></td>
+                        <td class="fs-8"><%= call.email %></td>
+                        <td class="fs-8"><%= call.phone %></td>
+                        <td class="fs-8"><%= call.date %></td>
+                        <td class="fs-8"><%= call.paidPrice %> ₺</td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal<%= i %>">Sil</button>
+                        </td>
+                    </tr>
+                    <div class="modal fade" id="deleteModal<%= i %>" tabindex="-1" aria-labelledby="deleteModalLabel<%= i %>" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header border-0">
+                              <h5 class="modal-title" id="deleteModalLabel<%= i %>">Uyarı</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              Bu öğeyi silmek istediğinizden eminmisiniz ?
+                            </div>
+                            <div class="modal-footer border-0"">
+                              <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">İptal</button>
+                              <a href="/deletepy/<%=call._id %>" class="btn btn-success btn-sm px-3">Onayla</a>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+    
+    <%- include ("../../admin/partials/alerts.ejs") %>
+    <%- include ("../partials/footer.ejs") %>

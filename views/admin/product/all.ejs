@@ -1,0 +1,46 @@
+<%- include ("../../admin/partials/header.ejs") %>
+    <div class="container-fluid mt-3">
+        <div class="row">
+            <% found.forEach((call)=>{ %>
+                <% 
+                    let total =  call.totalAmount;
+                    let process = 100-((100*call.remainingAmount)/total);
+                    let conclusion = Math.ceil(process);
+                    let remainder=(100 - conclusion)/10;
+                %>
+                <div class="col-12">
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                          <div class="col-md-3">
+                            <img src="data:image/png;base64, <%= call.image %>" class="img-fluid rounded-start p-2">
+                          </div>
+                          <div class="col-md-9">
+                            <div class="card-body">
+                              <ul class="list-group mb-3">
+                                <li class="list-group-item"><h5 class="card-title"><%= call.title %></h5></li>
+                                <li class="list-group-item"><span class="fw-bold">İd: </span><%= call._id %></li>
+                                <li class="list-group-item"><p class="card-text"><%= call.description %></p></li>
+                                <li class="list-group-item"><p><span class="fw-bold">Toplam Tutar: </span><%= call.totalAmount %> TL</p></li>
+                                <li class="list-group-item"><p><span class="fw-bold">Kalan Tutar:</span> <%= call.remainingAmount %> TL</p></li>
+                              </ul>
+                              <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" data-w="<%=conclusion%>" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                <%=conclusion%>%</div>
+                            </div>
+                            </div>
+                            <div class="card-footer bg-white">
+                                <div class="btn-group">
+                                    <a href="/delete/<%=call._id %>" class="btn btn-danger btn-sm">Sil</a>
+                                    <a href="/edit/<%=call._id %>" class="btn btn-success btn-sm">Düzenle</a>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <% }); %>
+        </div>
+    </div>
+<%- include ("../../admin/partials/alerts.ejs") %>
+<%- include ("../../admin/partials/footer.ejs") %>
+    
