@@ -176,11 +176,11 @@
                                                                 <div class="row">
                                                                     <input type="text" hidden value="<%= call._id %>"
                                                                         name="productId">
-                                                                    <div class="col-md-6">
+                                                                    <div class="col-lg-6">
                                                                         <div class="mb-3">
                                                                             <small class="d-block text-dark mb-2">Bağış Tutarı</small>
                                                                             <div class="row">
-                                                                                <div class="col-md-6">
+                                                                                <div class="col-lg-6 col-md-12">
                                                                                     <input type="radio" class="btn-check price-check" name="test" id="option1<%= i %>" autocomplete="off" value="10">
                                                                                     <label class="btn btn-outline-primary" for="option1<%= i %>">10 TL</label>
                                                                                     
@@ -190,7 +190,7 @@
                                                                                     <input type="radio" class="btn-check price-check" name="test" id="option3<%= i %>" autocomplete="off" value="100">
                                                                                     <label class="btn btn-outline-primary" for="option3<%= i %>">100 TL</label>
                                                                                 </div>
-                                                                                <div class="col-md-6">
+                                                                                <div class="col-lg-6 col-md-12">
                                                                                     <div class="input-group mb-3">
                                                                                         <input type="text" class="form-control price-input border-primary" name="paidPrice" id="option4<%= i %>" aria-describedby="option4<%= i %>">
                                                                                         <span class="input-group-text bg-primary border-primary text-white" id="option4<%= i %>">TL</span>
@@ -199,7 +199,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-md-6">
+                                                                    <div class="col-lg-6">
                                                                         <div class="mb-3">
                                                                             <label for="cardHolderName"
                                                                                 class="form-label"><small>Kart
@@ -210,7 +210,7 @@
                                                                                 name="cardHolderName">
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-md-6">
+                                                                    <div class="col-lg-6">
                                                                         <div class="mb-3">
                                                                             <label for="cardNumber"
                                                                                 class="form-label"><small>Kart
@@ -220,17 +220,16 @@
                                                                                 name="cardNumber">
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-md-3">
+                                                                    <div class="col-lg-3 col-md-6">
                                                                         <div class="mb-3">
-                                                                            <label for="date"
-                                                                                class="form-label price-card-date"><small>Bitiş
-                                                                                    Tarihi</small></label>
-                                                                            <input type="text" class="form-control"
-                                                                                id="date" required name="date"
-                                                                                minlength="5" maxlength="5" placeholder="MM/YY">
+                                                                            <label for="date" class="mb-2"><small>Bitiş Tarihi</small></label>
+                                                                            <div class="input-group">
+                                                                                <input type="text" name="month" id="date" class="form-control" placeholder="MM" maxlength="2" required>
+                                                                                <input type="text" name="year" class="form-control" placeholder="YYYY" maxlength="4" required>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-md-3">
+                                                                    <div class="col-lg-3 col-md-6">
                                                                         <div class="mb-3">
                                                                             <label for="cvc"
                                                                                 class="form-label"><small>CVC</small></label>

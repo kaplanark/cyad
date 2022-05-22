@@ -14,13 +14,13 @@ var iyzipay = new Iyzipay({
 
 const makePayment = async (req, res) => {
   try {
-    const { name, surname, email,phone, paidPrice, cardHolderName, cardNumber, date, cvc, productId } = req.body;
-    if (!(name && surname && email && phone && paidPrice && cardHolderName && cardNumber && date && cvc && productId)) {
+    const { name, surname, email,phone, paidPrice, cardHolderName, cardNumber, month,year, cvc, productId } = req.body;
+    if (!(name && surname && email && phone && paidPrice && cardHolderName && month && year && cardNumber && cvc && productId)) {
       res.status(400);
       req.flash("message", "Tüm Girişleri Kontrol Edin");
     }
-    let month = date.split('/')[0];
-    let year = date.split('/')[1];
+    // let month = date.split('/')[0];
+    // let year = date.split('/')[1];
     var request = {
       locale: Iyzipay.LOCALE.TR,
       conversationId: '123456789',
@@ -34,7 +34,7 @@ const makePayment = async (req, res) => {
         cardHolderName: cardHolderName,
         cardNumber: cardNumber,
         expireMonth: month,
-        expireYear: `20${year}`,
+        expireYear: year,
         cvc: cvc,
         registerCard: '0'
       },
