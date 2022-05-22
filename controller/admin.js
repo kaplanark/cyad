@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const Payment = require("../models/payment");
 const Homepage = require("../models/homepage");
+const Links = require("../models/links");
 const dotenv = require("dotenv");
 dotenv.config();
 const bcrypt = require("bcryptjs");
@@ -159,7 +160,7 @@ const homePageSR = async (req, res) => {
 
 const homePageSettings = async (req, res) => {
   try {
-    const { id,title, bannertext, herotext} = req.body;
+    const { id, title, bannertext, herotext } = req.body;
     const updateSet = await Homepage.findByIdAndUpdate({ _id: id }, {
       title,
       bannertext,
@@ -174,11 +175,40 @@ const homePageSettings = async (req, res) => {
   }
 }
 
-// //getFlash
-// const getFlah = async (req,res) => {
-//   req.flash("message", "Not possible yet");
-//   res.redirect("/admin");
-// };
+const socialLinks = async (req, res) => {
+  Links.findOne({}, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('admin/sociallinks', { linksData: data });
+    }
+  });
+};
+
+const socialLinksUpdate = async (req, res) => {
+  try {
+    const { facebook, twitter, instagram } = req.body;
+    const cc = await Links.findOne({});
+    if (cc) {
+      Links.updateOne({ facebook, twitter, instagram }, (err) => {
+        if (err) {
+          console.log(err);
+          req.flash("error", "Güncelleme başarısız");
+          res.redirect("/sociallinks");
+        }
+        req.flash("success", "Güncelleme başarılı");
+        res.redirect("/sociallinks");
+      });
+    } else {
+      const createLinks = await Links.create(
+        { facebook, twitter, instagram }
+      );
+      res.redirect("/sociallinks");
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 module.exports = {
   renderPage,
@@ -189,6 +219,8 @@ module.exports = {
   updateUser,
   newUser,
   homePageSR,
-  homePageSettings
+  homePageSettings,
+  socialLinks,
+  socialLinksUpdate
 };
 

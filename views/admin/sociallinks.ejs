@@ -1,0 +1,22 @@
+<%- include ("../admin/partials/header.ejs") %>
+
+<div class="container-fluid mt-4">
+    <form action="/sociallinks" method="POST">
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><i class="bi bi-facebook"></i></span>
+            <input type="text" name="facebook" class="form-control" placeholder="facebook" aria-label="facebook" aria-describedby="basic-addon1" value="<%= linksData.facebook %>">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon2"><i class="bi bi-twitter"></i></span>
+            <input type="text" name="twitter" class="form-control" placeholder="twitter" aria-label="twitter" aria-describedby="basic-addon2" value="<%= linksData.twitter %>">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon3"><i class="bi bi-instagram"></i></span>
+            <input type="text" name="instagram" class="form-control" placeholder="instagram" aria-label="instagram" aria-describedby="basic-addon3" value="<%= linksData.instagram %>">
+        </div>
+        <button type="submit" class="btn btn-primary">Güncelle</button>
+    </form>
+</div>
+
+<%- include ("../admin/partials/alerts.ejs") %>
+<%- include ("../admin/partials/footer.ejs") %>

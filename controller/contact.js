@@ -1,5 +1,6 @@
 // const nodemailer = require("nodemailer");
 const Mail = require("../models/contact");
+const Links = require("../models/links");
 const Homepage = require("../models/homepage");
 const telegramBot = require("../helper/telegrambot");
 
@@ -8,7 +9,12 @@ const renderPage = async (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            res.render("pages/contact", { homeData: homeData });
+            Links.findOne({}, (err, linksData) => {
+                if(err){
+                    console.log(err);
+                }
+                res.render('pages/contact', { homeData: homeData,linksData:linksData });
+            })
         }
     });
 }

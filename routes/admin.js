@@ -21,5 +21,7 @@ router.post("/updateuser", authorization, adminConroller.updateUser);
 router.post("/newuser", authorization, adminConroller.newUser);
 router.get("/hpsettings", authorization, adminConroller.homePageSR);
 router.post("/hpsettings", authorization, adminConroller.homePageSettings);
+router.get("/sociallinks", authorization, adminConroller.socialLinks);
+router.post("/sociallinks", authorization,adminConroller.socialLinksUpdate);
 
 module.exports = router;

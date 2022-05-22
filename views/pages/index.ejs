@@ -49,7 +49,7 @@
                     <% found.forEach((call,i)=>{ %>
                         <% let total=call.totalAmount; let process=100-((100*call.remainingAmount)/total); let
                             conclusion=Math.ceil(process); let remainder=(100 - conclusion)/10; %>
-                            <div class="col-lg-3 mb-4">
+                            <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
                                 <div class="product-card card border-0 mb-4 h-100">
                                     <div class="card-header border-0 bg-transparent">
                                         <figure class="bar-image" data-r="<%=remainder%>">
